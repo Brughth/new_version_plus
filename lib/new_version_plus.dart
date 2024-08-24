@@ -237,9 +237,9 @@ class NewVersionPlus {
       appStoreLink,
       launchMode: launchMode,
     );
-    if (allowDismissal) {
-      Navigator.of(context, rootNavigator: true).pop();
-    }
+    // if (allowDismissal) {
+    Navigator.of(context, rootNavigator: true).pop();
+    // }
   }
 
   /// Shows the user a platform-specific alert about the app update. The user
@@ -253,6 +253,7 @@ class NewVersionPlus {
     required VersionStatus versionStatus,
     String dialogTitle = 'Update Available',
     String? dialogText,
+    Widget? dialogContent,
     String updateButtonText = 'Update',
     bool allowDismissal = true,
     String dismissButtonText = 'Maybe Later',
@@ -318,12 +319,12 @@ class NewVersionPlus {
             child: Platform.isAndroid
                 ? AlertDialog(
                     title: dialogTitleWidget,
-                    content: dialogTextWidget,
+                    content: dialogContent ?? dialogTextWidget,
                     actions: actions,
                   )
                 : CupertinoAlertDialog(
                     title: dialogTitleWidget,
-                    content: dialogTextWidget,
+                    content: dialogContent ?? dialogTextWidget,
                     actions: actions,
                   ),
             onWillPop: () => Future.value(allowDismissal));
